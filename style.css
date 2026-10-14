@@ -1,0 +1,2373 @@
+/* ==========================================================================
+   HARSHITHA.exe — Master Style System
+   Dual Aesthetic: Retro Cyberpunk Terminal / CSE Hacker & Cosmic Starlight Galaxy
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=Share+Tech+Mono&display=swap');
+
+:root {
+  /* Cyber Palette */
+  --bg-deep: #07090e;
+  --bg-card: rgba(14, 19, 30, 0.88);
+  --bg-glass: rgba(18, 25, 42, 0.65);
+  --border-neon: rgba(0, 243, 255, 0.35);
+  --green-term: #00ff66;
+  --cyan-neon: #00f3ff;
+  --pink-neon: #ff007f;
+  --yellow-warm: #ffaa00;
+  --purple-cosmic: #bd00ff;
+  --red-danger: #ff2244;
+  --text-primary: #e6f1ff;
+  --text-muted: #8892b0;
+  --font-mono: 'Fira Code', 'Share Tech Mono', monospace;
+  --font-sans: 'Outfit', sans-serif;
+  --glow-cyan: 0 0 20px rgba(0, 243, 255, 0.45);
+  --glow-pink: 0 0 20px rgba(255, 0, 127, 0.45);
+  --glow-green: 0 0 20px rgba(0, 255, 102, 0.45);
+}
+
+/* Global Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+  user-select: none;
+}
+
+/* CRT Scanlines Overlay */
+.crt-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.03),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 6px 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.85;
+}
+
+/* Top Navigation HUD */
+.top-hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+  background: rgba(7, 9, 14, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+  z-index: 1000;
+}
+
+.hud-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.sys-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-term);
+  box-shadow: 0 0 8px var(--green-term);
+  animation: pulseDot 2s infinite;
+}
+
+.sys-tag {
+  color: var(--cyan-neon);
+}
+
+.hud-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud-btn {
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid var(--border-neon);
+  color: var(--cyan-neon);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.hud-btn:hover {
+  background: rgba(0, 243, 255, 0.25);
+  box-shadow: var(--glow-cyan);
+}
+
+/* App Main Container */
+#app-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 70px 16px 24px;
+  position: relative;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.active-scene {
+  animation: sceneFadeIn 0.5s ease forwards;
+}
+
+@keyframes sceneFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   BUTTONS & CYBER ELEMENTS
+   ========================================================================== */
+.cyber-btn-primary {
+  background: linear-gradient(135deg, var(--cyan-neon), #0099cc);
+  color: #07090e;
+  border: none;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.5px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: var(--glow-cyan);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.cyber-btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.15);
+  box-shadow: 0 0 25px rgba(0, 243, 255, 0.8);
+}
+
+.cyber-btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cyber-btn-secondary:hover {
+  background: rgba(0, 243, 255, 0.15);
+  border-color: var(--cyan-neon);
+  color: var(--cyan-neon);
+}
+
+.cyber-btn-danger {
+  background: rgba(255, 34, 68, 0.15);
+  border: 1px solid var(--red-danger);
+  color: var(--red-danger);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 14px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.cyber-btn-danger:hover {
+  background: var(--red-danger);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(255, 34, 68, 0.6);
+}
+
+/* ==========================================================================
+   SCENE 0: BOOT SEQUENCE
+   ========================================================================== */
+.terminal-window {
+  width: 100%;
+  max-width: 680px;
+  background: rgba(10, 14, 22, 0.95);
+  border: 1px solid var(--border-neon);
+  border-radius: 10px;
+  box-shadow: var(--glow-cyan);
+  overflow: hidden;
+}
+
+.terminal-titlebar {
+  background: rgba(18, 25, 42, 0.9);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+.titlebar-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.titlebar-text {
+  font-size: 12px;
+  color: var(--cyan-neon);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.terminal-body {
+  padding: 24px;
+  min-height: 380px;
+  max-height: 500px;
+  overflow-y: auto;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--green-term);
+}
+
+.term-line {
+  margin-bottom: 4px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-highlight {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 0 10px var(--cyan-neon);
+}
+
+.terminal-action-area {
+  padding: 16px 24px;
+  background: rgba(18, 25, 42, 0.5);
+  border-top: 1px solid rgba(0, 243, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.key-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   SCENE 1: SYSTEM PERSONALITY
+   ========================================================================== */
+.personality-box {
+  width: 100%;
+  max-width: 620px;
+  background: var(--bg-card);
+  border: 1px solid var(--cyan-neon);
+  border-radius: 12px;
+  padding: 32px 28px;
+  box-shadow: var(--glow-cyan);
+  text-align: center;
+}
+
+.personality-avatar {
+  font-size: 48px;
+  margin-bottom: 16px;
+  animation: floatAvatar 3s ease-in-out infinite;
+}
+
+.personality-dialogue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.personality-bubble {
+  background: rgba(0, 243, 255, 0.08);
+  border-left: 3px solid var(--cyan-neon);
+  padding: 12px 18px;
+  border-radius: 0 8px 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #ffffff;
+  animation: sceneFadeIn 0.4s ease forwards;
+}
+
+/* ==========================================================================
+   SCENE 2: QUIZ
+   ========================================================================== */
+.quiz-container {
+  width: 100%;
+  max-width: 660px;
+}
+
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-neon);
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.quiz-header {
+  margin-bottom: 22px;
+}
+
+.quiz-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--cyan-neon);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.progress-track {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan-neon), var(--pink-neon));
+  transition: width 0.3s ease;
+}
+
+.quiz-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.quiz-option-btn {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  line-height: 1.4;
+}
+
+.quiz-option-btn.selected {
+  border-color: var(--cyan-neon);
+  background: rgba(0, 243, 255, 0.2);
+  color: #fff;
+}
+
+.reaction-box {
+  background: rgba(255, 0, 127, 0.12);
+  border: 1px solid var(--pink-neon);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  animation: sceneFadeIn 0.3s ease;
+}
+
+.alarm-alert {
+  background: rgba(255, 34, 68, 0.2) !important;
+  border-color: var(--red-danger) !important;
+  animation: shakeAlert 0.4s ease;
+}
+
+@keyframes shakeAlert {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+.reaction-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pink-neon);
+  margin-bottom: 6px;
+}
+
+.reaction-text {
+  font-size: 13.5px;
+  line-height: 1.4;
+  color: #fff;
+}
+
+.summary-wrapper {
+  text-align: center;
+  padding: 20px 10px;
+}
+
+.summary-icon {
+  font-size: 48px;
+  margin-bottom: 14px;
+}
+
+.summary-subtext {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 16px 0 20px;
+}
+
+.summary-badge {
+  background: rgba(0, 255, 102, 0.12);
+  border: 1px solid var(--green-term);
+  color: var(--green-term);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  display: inline-block;
+}
+
+/* ==========================================================================
+   SCENE 3: MEMORY DATABASE & MAP
+   ========================================================================== */
+.memories-container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.cyber-badge {
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid var(--cyan-neon);
+  color: var(--cyan-neon);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* Interactive Memory Map */
+.memory-map-card {
+  background: rgba(14, 19, 32, 0.85);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 28px;
+}
+
+.map-nodes-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.map-node {
+  background: #0f1626;
+  border: 2px solid;
+  border-radius: 14px;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.map-node:hover {
+  transform: translateY(-5px) scale(1.05);
+}
+
+.map-node-icon {
+  font-size: 24px;
+}
+
+.map-node-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Memory Files Grid */
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.memory-file-item {
+  background: rgba(14, 20, 32, 0.7);
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.memory-file-item:hover {
+  background: rgba(18, 26, 44, 0.9);
+  transform: translateY(-3px);
+}
+
+.mem-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.mem-icon { font-size: 20px; }
+.mem-id { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+.mem-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+.mem-date { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
+.mem-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+
+/* Polaroid Artwork in Modal */
+.polaroid-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.polaroid-card {
+  background: #ffffff;
+  padding: 12px 12px 18px;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  color: #1a1a1a;
+  text-align: center;
+  width: 260px;
+  transform: rotate(-1.5deg);
+}
+
+.polaroid-art-box {
+  width: 100%;
+  height: 170px;
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 12px;
+  text-align: center;
+}
+
+.art-badge { font-size: 38px; margin-bottom: 8px; }
+.art-caption { font-size: 12px; font-weight: 600; color: #fff; }
+.polaroid-label {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 600;
+  margin-top: 10px;
+  color: #444;
+}
+
+/* ==========================================================================
+   SCENE 4: LEVEL 3 — THE FRIENDSHIP GAME
+   ========================================================================== */
+.game-viewport-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-neon);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-hud {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(10, 14, 22, 0.7);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 12px;
+}
+
+.hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.hud-label { color: var(--text-muted); }
+.hud-val { color: var(--cyan-neon); font-weight: 700; }
+
+.canvas-wrapper {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 243, 255, 0.25);
+  background: #000;
+}
+
+#game-canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 900 / 650;
+}
+
+/* Mobile D-Pad Controls */
+.mobile-dpad-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin-top: 16px;
+  padding: 0 10px;
+}
+
+.dpad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 48px);
+  grid-template-rows: repeat(3, 48px);
+  gap: 6px;
+}
+
+.dpad-btn {
+  background: rgba(18, 26, 44, 0.85);
+  border: 1px solid var(--border-neon);
+  color: var(--cyan-neon);
+  font-size: 18px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dpad-btn:active {
+  background: var(--cyan-neon);
+  color: #07090e;
+}
+
+.dpad-up { grid-column: 2; grid-row: 1; }
+.dpad-left { grid-column: 1; grid-row: 2; }
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down { grid-column: 2; grid-row: 3; }
+
+.dpad-action-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.dpad-action-btn {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink-neon), #cc0066);
+  border: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: var(--glow-pink);
+}
+
+.dpad-action-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================================================
+   SCENE 5: LEVEL 4 — CORRUPTED FILE & PASSWORD
+   ========================================================================== */
+.glitch-wrapper {
+  width: 100%;
+  max-width: 600px;
+}
+
+.glitch-card {
+  background: rgba(14, 18, 28, 0.95);
+  border: 1px solid var(--red-danger);
+  border-radius: 12px;
+  padding: 32px 26px;
+  box-shadow: 0 0 30px rgba(255, 34, 68, 0.35);
+  text-align: center;
+}
+
+.glitch-warning-badge {
+  background: rgba(255, 34, 68, 0.15);
+  border: 1px solid var(--red-danger);
+  color: var(--red-danger);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 16px;
+  animation: pulseDot 1.2s infinite;
+}
+
+.password-input-group {
+  display: flex;
+  gap: 10px;
+  margin: 22px 0 16px;
+}
+
+.cyber-input {
+  flex: 1;
+  background: #0a0d14;
+  border: 1px solid rgba(0, 243, 255, 0.4);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  outline: none;
+  text-transform: uppercase;
+}
+
+.cyber-input:focus {
+  border-color: var(--cyan-neon);
+  box-shadow: var(--glow-cyan);
+}
+
+.password-hints-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.hint-display-box {
+  background: rgba(255, 170, 0, 0.1);
+  border: 1px solid var(--yellow-warm);
+  color: var(--yellow-warm);
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  max-width: 100%;
+  line-height: 1.4;
+}
+
+.roast-display-box {
+  background: rgba(255, 34, 68, 0.15);
+  border: 1px solid var(--red-danger);
+  color: #ff99aa;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.success-display-box {
+  background: rgba(0, 255, 102, 0.15);
+  border: 1px solid var(--green-term);
+  color: var(--green-term);
+  padding: 14px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-top: 14px;
+}
+
+/* ==========================================================================
+   SCENE 6: THE TONE SHIFT
+   ========================================================================== */
+.tone-shift-wrapper {
+  max-width: 600px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.tone-statement {
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: #e6f1ff;
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+
+.fade-in {
+  animation: smoothFadeIn 1.5s ease forwards;
+}
+
+@keyframes smoothFadeIn {
+  from { opacity: 0; filter: blur(4px); }
+  to { opacity: 1; filter: blur(0); }
+}
+
+/* ==========================================================================
+   SCENE 7: LEVEL 5 — THE GALAXY
+   ========================================================================== */
+#scene-galaxy {
+  position: fixed;
+  inset: 0;
+  background: #060713;
+  z-index: 100;
+}
+
+#galaxy-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#galaxy-canvas:active {
+  cursor: grabbing;
+}
+
+.galaxy-ui-overlay {
+  position: absolute;
+  top: 70px;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  pointer-events: none;
+  z-index: 10;
+  padding: 0 16px;
+}
+
+.galaxy-hud-card {
+  background: rgba(14, 18, 36, 0.65);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 30px;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  pointer-events: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.galaxy-tip {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.galaxy-bottom-controls {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  pointer-events: auto;
+  z-index: 10;
+  padding: 0 16px;
+}
+
+/* ==========================================================================
+   SCENE 8: LEVEL 6 — THE LETTER
+   ========================================================================== */
+.letter-wrapper {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.letter-card {
+  background: rgba(12, 16, 28, 0.92);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 243, 255, 0.3);
+  border-radius: 16px;
+  padding: 38px 34px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7);
+}
+
+.letter-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 14px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--cyan-neon);
+}
+
+.letter-body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: #e2e8f0;
+}
+
+.letter-greeting {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+
+.letter-para {
+  margin-bottom: 18px;
+}
+
+.letter-signoff {
+  margin-top: 32px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-top: 16px;
+}
+
+.signoff-text {
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--pink-neon);
+}
+
+.signoff-date {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   SCENE 9: FAKE DELETE BUTTON JOKE
+   ========================================================================== */
+.delete-joke-wrapper {
+  width: 100%;
+  max-width: 580px;
+  text-align: center;
+}
+
+.delete-card {
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 14px;
+  padding: 36px 28px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+.delete-actions-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+/* ==========================================================================
+   SCENE 10: FINAL ACHIEVEMENT & EASTER EGGS
+   ========================================================================== */
+.achievement-wrapper {
+  width: 100%;
+  max-width: 620px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.achievement-card {
+  background: linear-gradient(145deg, rgba(20, 26, 44, 0.95), rgba(10, 14, 24, 0.95));
+  border: 2px solid #ffd700;
+  border-radius: 18px;
+  padding: 38px 28px;
+  box-shadow: 0 0 40px rgba(255, 215, 0, 0.35);
+  position: relative;
+}
+
+.trophy-badge {
+  font-size: 64px;
+  margin-bottom: 12px;
+  animation: floatAvatar 2.5s ease-in-out infinite;
+}
+
+.achievement-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffd700;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin: 26px 0;
+  text-align: left;
+}
+
+.stat-item {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+
+.stat-name { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+.stat-val { font-size: 14px; font-weight: 700; color: var(--green-term); }
+
+.permanent-status-banner {
+  background: rgba(0, 243, 255, 0.1);
+  border: 1px solid var(--cyan-neon);
+  color: var(--cyan-neon);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 12px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.secret-trigger-btn {
+  position: fixed;
+  bottom: 18px;
+  right: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 1000;
+}
+
+.secret-trigger-btn:hover {
+  background: var(--pink-neon);
+  color: #fff;
+  border-color: var(--pink-neon);
+  box-shadow: var(--glow-pink);
+}
+
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* ==========================================================================
+   MODALS (COMMON)
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 7, 12, 0.85);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 2000;
+  animation: sceneFadeIn 0.25s ease;
+}
+
+.modal-content-card {
+  width: 100%;
+  max-width: 520px;
+  background: rgba(14, 19, 32, 0.98);
+  border: 1px solid var(--border-neon);
+  border-radius: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+/* Animations */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+@keyframes floatAvatar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes birthdayGlow {
+  0%, 100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.4), 0 0 50px rgba(255, 0, 127, 0.2); }
+  50% { box-shadow: 0 0 45px rgba(255, 215, 0, 0.7), 0 0 70px rgba(255, 0, 127, 0.4); }
+}
+
+/* Birthday Edition Highlights */
+.achievement-card {
+  animation: birthdayGlow 4s infinite ease-in-out;
+}
+
+.trophy-badge {
+  font-size: 54px;
+  margin-bottom: 12px;
+  animation: floatAvatar 3s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   INTERACTIVE 19TH BIRTHDAY EXPERIENCE LAYER STYLES
+   ========================================================================== */
+
+/* HUD Button with Golden Glow */
+.bday-hud-btn {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.25), rgba(255, 0, 127, 0.25));
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+  animation: pulseBirthdayBtn 2.5s infinite ease-in-out;
+}
+
+.bday-hud-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.45), rgba(255, 0, 127, 0.45));
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+  transform: translateY(-1px);
+}
+
+@keyframes pulseBirthdayBtn {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 0, 127, 0.4); }
+}
+
+.bday-glow-btn {
+  background: linear-gradient(135deg, #ffd700, #ff007f) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5) !important;
+}
+
+.bday-glow-btn:hover {
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.8) !important;
+  transform: scale(1.02);
+}
+
+/* Fullscreen Modal Overlay */
+.bday-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 14, 0.88);
+  backdrop-filter: blur(16px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.bday-modal-container {
+  width: 100%;
+  max-width: 860px;
+  background: rgba(14, 19, 32, 0.96);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 16px;
+  padding: 24px 28px;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.25);
+  position: relative;
+  max-height: 92vh;
+  overflow-y: auto;
+}
+
+/* Modal Top Bar */
+.bday-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.bday-title-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: #ffd700;
+  font-weight: 700;
+}
+
+.bday-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffd700;
+  box-shadow: 0 0 8px #ffd700;
+  animation: pulseDot 1.5s infinite;
+}
+
+.bday-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-primary);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-mono);
+}
+
+.bday-close-btn:hover {
+  background: var(--red-danger);
+  border-color: var(--red-danger);
+  color: #fff;
+}
+
+/* Banner */
+.bday-banner {
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.bday-banner-tag {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.bday-banner-title {
+  font-family: var(--font-sans);
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 40%, #ffd700 80%, #ff007f 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.bday-banner-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Tabs */
+.bday-tabs-nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 10px;
+  overflow-x: auto;
+}
+
+.bday-tab-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--text-muted);
+  padding: 9px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-family: var(--font-mono);
+}
+
+.bday-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.bday-tab-btn.active {
+  background: rgba(255, 215, 0, 0.18);
+  border-color: #ffd700;
+  color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.25);
+}
+
+.bday-tab-pane {
+  display: none;
+}
+
+.bday-tab-pane.active-pane {
+  display: block;
+  animation: fadeInPane 0.3s ease;
+}
+
+@keyframes fadeInPane {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================================
+   TAB 1: 19 CANDLES & CYBER CAKE
+   ========================================================================== */
+.cake-activity-card {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(0, 243, 255, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  text-align: center;
+}
+
+.cake-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 8px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 6px;
+}
+
+.candles-counter {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--cyan-neon);
+}
+
+.candles-hint {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+/* Cake Stage */
+.cake-stage-wrapper {
+  position: relative;
+  padding: 30px 10px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cake-display-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  transition: transform 0.4s ease;
+}
+
+.cake-cut-animation {
+  animation: cakeSliceEffect 0.8s ease-in-out;
+}
+
+@keyframes cakeSliceEffect {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0 transparent); }
+  40% { transform: scale(1.08) rotate(-1deg); filter: drop-shadow(0 0 35px #ffd700); }
+  70% { transform: scale(0.96) rotate(1deg); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 10px #ffd700); }
+}
+
+/* 19 Candles Row */
+.candles-row {
+  display: flex;
+  gap: clamp(3px, 1.2vw, 7px);
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: -4px;
+  z-index: 10;
+  flex-wrap: wrap;
+  max-width: min(440px, 94vw);
+}
+
+.cyber-candle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.15s ease;
+}
+
+.cyber-candle:hover {
+  transform: translateY(-4px) scale(1.1);
+}
+
+.candle-flame-wrapper {
+  position: relative;
+  height: 22px;
+  width: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.candle-flame {
+  width: 10px;
+  height: 18px;
+  background: radial-gradient(ellipse at 50% 80%, #ffffff 0%, #ffff55 25%, #ff8800 65%, #ff0044 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 12px #ff8800, 0 0 20px #ff0044;
+  animation: flameFlicker 0.25s infinite alternate ease-in-out;
+  transition: all 0.3s ease;
+}
+
+.candle-flame.extinguished {
+  opacity: 0;
+  transform: scale(0.2);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scaleY(1) rotate(-1.5deg); }
+  100% { transform: scaleY(1.15) rotate(1.5deg); }
+}
+
+.candle-smoke {
+  position: absolute;
+  top: 0;
+  width: 6px;
+  height: 12px;
+  background: rgba(200, 200, 200, 0.4);
+  border-radius: 50%;
+  animation: smokeRise 1.2s forwards ease-out;
+}
+
+@keyframes smokeRise {
+  0% { transform: translateY(0) scale(1); opacity: 0.8; }
+  100% { transform: translateY(-30px) scale(3.5); opacity: 0; }
+}
+
+.candle-wick {
+  width: 2px;
+  height: 5px;
+  background: #333;
+}
+
+.candle-stick {
+  width: 14px;
+  height: 38px;
+  background: linear-gradient(180deg, #ff007f 0%, #bd00ff 50%, #00f3ff 100%);
+  border-radius: 3px 3px 0 0;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 6px rgba(255, 0, 127, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-bottom: 2px;
+}
+
+.candle-number {
+  font-size: 8px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+/* 3-Tier Neon Cake */
+.cyber-cake {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake-tier {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 2px solid;
+  position: relative;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.tier-top {
+  width: min(180px, 48vw);
+  max-width: 100%;
+  height: 48px;
+  background: linear-gradient(180deg, #2a1548 0%, #15092a 100%);
+  border-color: #ffd700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.35);
+  font-size: clamp(13px, 3.5vw, 16px);
+  color: #ffd700;
+}
+
+.tier-mid {
+  width: min(270px, 68vw);
+  max-width: 100%;
+  height: 56px;
+  background: linear-gradient(180deg, #1b2046 0%, #0b1126 100%);
+  border-color: var(--cyan-neon);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.35);
+  font-size: clamp(12px, 3.2vw, 14px);
+  color: var(--cyan-neon);
+  margin-top: -2px;
+}
+
+.tier-base {
+  width: min(360px, 86vw);
+  max-width: 100%;
+  height: 64px;
+  background: linear-gradient(180deg, #3d122e 0%, #1d0715 100%);
+  border-color: var(--pink-neon);
+  box-shadow: 0 0 25px rgba(255, 0, 127, 0.35);
+  font-size: clamp(11px, 2.8vw, 13px);
+  color: var(--pink-neon);
+  margin-top: -2px;
+}
+
+.tier-frosting {
+  font-size: clamp(7px, 1.8vw, 9px);
+  color: #ffffff99;
+  letter-spacing: clamp(1px, 0.4vw, 2px);
+  line-height: 1;
+}
+
+.cake-stand {
+  width: min(400px, 92vw);
+  max-width: 100%;
+  height: 12px;
+  background: linear-gradient(90deg, #555, #ccc, #555);
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  margin-top: -2px;
+}
+
+/* Actions Row */
+.cake-actions-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 26px 0 20px;
+}
+
+/* Wish Box */
+.wish-section-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px dashed rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 16px 20px;
+  text-align: left;
+}
+
+.wish-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.wish-input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.wish-saved-msg {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--green-term);
+  line-height: 1.5;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   TAB 2: 19 MEMORY BALLOONS MINI-GAME
+   ========================================================================== */
+.balloons-activity-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 0, 127, 0.25);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.balloons-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.balloons-score-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--pink-neon);
+  font-size: 13px;
+}
+
+.balloon-canvas-wrapper {
+  width: 100%;
+  height: 360px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #080c16;
+  position: relative;
+  cursor: crosshair;
+}
+
+#balloon-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.balloon-popup-box {
+  margin-top: 14px;
+  background: rgba(14, 19, 32, 0.95);
+  border: 1px solid #ffd700;
+  border-radius: 10px;
+  padding: 14px 18px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  text-align: left;
+}
+
+.pop-pulse {
+  animation: popPulseAnim 0.4s ease-out;
+}
+
+@keyframes popPulseAnim {
+  0% { transform: scale(0.96); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.popup-num-tag {
+  background: #ffd700;
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.popup-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.popup-text {
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   TAB 3: JUKEBOX & PASSPORT
+   ========================================================================== */
+.jukebox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.jukebox-card {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 243, 255, 0.25);
+  border-radius: 12px;
+  padding: 22px;
+}
+
+.passport-box {
+  display: flex;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 14px;
+}
+
+.passport-photo {
+  width: 72px;
+  height: 86px;
+  background: radial-gradient(circle, #ffd70044 0%, #111 80%);
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+}
+
+.passport-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: #e2e8f0;
+}
+
+.passport-details strong {
+  color: #ffd700;
+}
+
+.passport-status-stamp {
+  background: rgba(0, 255, 102, 0.12);
+  border: 1px solid var(--green-term);
+  color: var(--green-term);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 6px;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   ADVANCED MULTI-DEVICE RESPONSIVE SYSTEM
+   Strict adherence to mobile-first + desktop perfection:
+   320px, 360px, 375px, 390px, 412px, 768px, 1024px, 1366px, 1920px
+   ========================================================================== */
+
+/* Universal Responsive Base */
+html, body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+#app-container {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+  overflow-x: hidden;
+  padding: clamp(60px, 10dvh, 76px) clamp(10px, 3vw, 24px) max(20px, env(safe-area-inset-bottom));
+}
+
+/* Touch Targets & Button Responsiveness */
+.cyber-btn-primary,
+.cyber-btn-secondary,
+.cyber-btn-danger,
+.hud-btn,
+.dpad-btn,
+.dpad-action-btn,
+.bday-tab-btn,
+.quiz-option-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Large Desktop & High-DPI screens (1366px - 1920px+) */
+@media (min-width: 1366px) {
+  #app-container {
+    padding-top: 80px;
+  }
+  .memories-container {
+    max-width: 980px;
+  }
+  .memory-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablets & Small Laptops (769px - 1024px) */
+@media (max-width: 1024px) {
+  .memories-container {
+    max-width: 820px;
+  }
+  .memory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .letter-card {
+    padding: 32px 28px;
+  }
+  .bday-modal-container {
+    max-width: 760px;
+  }
+}
+
+/* Tablets (Portrait) & Large Phones (max-width: 768px) */
+@media (max-width: 768px) {
+  .top-hud {
+    padding: max(8px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) 8px max(12px, env(safe-area-inset-left));
+  }
+
+  .hud-logo {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .hud-controls {
+    gap: 8px;
+  }
+
+  .terminal-window {
+    max-width: 100%;
+  }
+
+  .terminal-body {
+    min-height: 290px;
+    max-height: 48dvh;
+    font-size: 12.5px;
+    padding: 16px;
+  }
+
+  .quiz-card {
+    padding: 22px 18px;
+  }
+
+  .quiz-title {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  .map-nodes-row {
+    gap: 12px;
+  }
+
+  .map-node {
+    width: 68px;
+    height: 68px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .tone-statement {
+    font-size: 20px;
+    line-height: 1.7;
+  }
+
+  .letter-card {
+    padding: 24px 20px;
+  }
+
+  .letter-body {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .jukebox-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bday-modal-container {
+    padding: 20px 16px;
+    max-height: 94dvh;
+  }
+}
+
+/* Standard Mobile Devices (max-width: 600px) */
+@media (max-width: 600px) {
+  .top-hud {
+    padding: max(6px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) 6px max(10px, env(safe-area-inset-left));
+  }
+
+  .hud-logo {
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  .hud-btn {
+    padding: 6px 10px;
+    font-size: 10.5px;
+  }
+
+  .bday-btn-label {
+    display: inline;
+  }
+
+  .section-title {
+    font-size: 20px;
+  }
+
+  .section-desc {
+    font-size: 12px;
+  }
+
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .memory-map-card {
+    padding: 14px 10px;
+  }
+
+  .map-nodes-row {
+    gap: 8px;
+  }
+
+  .map-node {
+    width: 60px;
+    height: 60px;
+  }
+
+  .map-node-icon {
+    font-size: 20px;
+  }
+
+  .map-node-label {
+    font-size: 8px;
+  }
+
+  .cake-actions-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .cake-actions-row button {
+    width: 100%;
+    max-width: 100%;
+    min-height: 46px;
+  }
+
+  .cake-status-bar {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 8px 10px;
+  }
+
+  .delete-actions-row {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .delete-actions-row button {
+    width: 100%;
+    min-height: 48px;
+  }
+
+  .bday-tabs-nav {
+    gap: 6px;
+    padding-bottom: 6px;
+  }
+
+  .bday-tab-btn {
+    padding: 8px 12px;
+    font-size: 11px;
+    min-height: 44px;
+  }
+}
+
+/* Compact Mobile Screens (max-width: 480px) */
+@media (max-width: 480px) {
+  #app-container {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 58px;
+  }
+
+  .top-hud {
+    padding: max(6px, env(safe-area-inset-top)) 8px 6px 8px;
+  }
+
+  .hud-logo {
+    font-size: 10px;
+    gap: 5px;
+  }
+
+  .bday-hud-btn {
+    padding: 5px 8px;
+    font-size: 10px;
+  }
+
+  .bday-btn-label {
+    font-size: 10px;
+  }
+
+  .terminal-window {
+    border-radius: 8px;
+  }
+
+  .terminal-body {
+    padding: 14px 10px;
+    min-height: 260px;
+    max-height: 44dvh;
+    font-size: 12px;
+  }
+
+  .terminal-action-area {
+    padding: 12px 10px;
+  }
+
+  #boot-start-btn {
+    width: 100%;
+    font-size: 12.5px;
+    letter-spacing: 0.5px;
+    padding: 12px 14px;
+    min-height: 46px;
+  }
+
+  .personality-box {
+    padding: 22px 14px;
+    border-radius: 10px;
+  }
+
+  .personality-avatar {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+
+  .personality-bubble {
+    font-size: 12.5px;
+    padding: 10px 12px;
+  }
+
+  #personality-proceed-btn {
+    width: 100%;
+    font-size: 12px;
+    padding: 12px 14px;
+    min-height: 46px;
+  }
+
+  .quiz-card {
+    padding: 18px 12px;
+    border-radius: 10px;
+  }
+
+  .quiz-title {
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .quiz-option-btn {
+    padding: 10px 12px;
+    font-size: 12.5px;
+    min-height: 48px;
+  }
+
+  .game-viewport-card {
+    padding: 10px 8px;
+  }
+
+  .game-hud {
+    font-size: 10.5px;
+    padding: 6px 8px;
+  }
+
+  .mobile-dpad-container {
+    max-width: 100%;
+    padding: 0 4px;
+    margin-top: 10px;
+  }
+
+  .dpad-grid {
+    grid-template-columns: repeat(3, 44px);
+    grid-template-rows: repeat(3, 44px);
+    gap: 4px;
+  }
+
+  .dpad-btn {
+    font-size: 16px;
+    border-radius: 6px;
+  }
+
+  .dpad-action-btn {
+    width: 64px;
+    height: 64px;
+    font-size: 11.5px;
+  }
+
+  .glitch-card {
+    padding: 22px 14px;
+  }
+
+  .password-input-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cyber-input {
+    width: 100%;
+    font-size: 13.5px;
+    padding: 10px 12px;
+    min-height: 46px;
+  }
+
+  #password-submit-btn {
+    width: 100%;
+    min-height: 46px;
+    font-size: 13px;
+  }
+
+  .tone-statement {
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .letter-card {
+    padding: 20px 14px;
+    border-radius: 12px;
+  }
+
+  .letter-greeting {
+    font-size: 18px;
+  }
+
+  .letter-body {
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .achievement-card {
+    padding: 24px 14px;
+    border-radius: 14px;
+  }
+
+  .achievement-title {
+    font-size: 18px;
+    letter-spacing: 0.5px;
+  }
+
+  .trophy-badge {
+    font-size: 48px;
+  }
+
+  .passport-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .passport-photo {
+    width: 64px;
+    height: 76px;
+    font-size: 28px;
+  }
+
+  .wish-input-group {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #save-wish-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .balloon-canvas-wrapper {
+    height: 270px;
+  }
+
+  .bday-banner-title {
+    font-size: 19px;
+  }
+
+  .bday-banner-subtitle {
+    font-size: 12px;
+  }
+}
+
+/* Small Screens & iPhone SE / Fold (max-width: 375px) */
+@media (max-width: 375px) {
+  #app-container {
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+
+  .hud-logo {
+    font-size: 9.5px;
+  }
+
+  .sys-tag {
+    display: none;
+  }
+
+  #sound-toggle-text {
+    display: none;
+  }
+
+  .hud-btn {
+    padding: 5px 8px;
+  }
+
+  .map-node {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+  }
+
+  .map-node-icon {
+    font-size: 17px;
+  }
+
+  .map-node-label {
+    font-size: 7px;
+  }
+
+  .quiz-title {
+    font-size: 14px;
+  }
+
+  .tone-statement {
+    font-size: 16.5px;
+  }
+
+  .dpad-grid {
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+  }
+
+  .dpad-action-btn {
+    width: 58px;
+    height: 58px;
+    font-size: 10.5px;
+  }
+
+  .bday-tab-btn {
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .bday-banner-title {
+    font-size: 17px;
+  }
+}
+
+/* Ultra-Compact & Narrow screens (320px) */
+@media (max-width: 330px) {
+  .hud-logo span {
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .bday-btn-label {
+    display: none;
+  }
+
+  .bday-hud-btn {
+    padding: 5px 6px;
+  }
+
+  .terminal-body {
+    font-size: 11px;
+    padding: 10px 6px;
+  }
+
+  .cyber-btn-primary {
+    font-size: 11px;
+    padding: 10px 12px;
+    letter-spacing: 0.5px;
+  }
+
+  .dpad-grid {
+    grid-template-columns: repeat(3, 36px);
+    grid-template-rows: repeat(3, 36px);
+  }
+
+  .dpad-action-btn {
+    width: 52px;
+    height: 52px;
+    font-size: 9.5px;
+  }
+}
+
+/* Mobile Landscape Adaptations */
+@media (max-height: 500px) and (orientation: landscape) {
+  #app-container {
+    padding-top: 50px;
+    padding-bottom: 12px;
+  }
+
+  .top-hud {
+    padding: 4px 16px;
+  }
+
+  .terminal-body {
+    min-height: 180px;
+    max-height: 50dvh;
+  }
+
+  .bday-modal-container {
+    max-height: 96dvh;
+    padding: 12px 16px;
+  }
+
+  .balloon-canvas-wrapper {
+    height: 200px;
+  }
+
+  .trophy-badge {
+    font-size: 36px;
+    margin-bottom: 6px;
+  }
+}
+

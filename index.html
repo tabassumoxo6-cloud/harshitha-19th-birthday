@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07090e">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="HARSHITHA.exe — Official 19th Birthday Experience & Friendship OS. A personalized interactive journey through memories, galaxies, and milestones.">
+  <title>HARSHITHA.exe — Happy 19th Birthday! 🎂⚡</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220%22%200%22%20100%22%20100%22><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Retro CRT Scanline Overlay -->
+  <div class="crt-overlay"></div>
+
+  <!-- Top Navigation HUD -->
+  <header class="top-hud">
+    <div class="hud-logo">
+      <div class="sys-dot"></div>
+      <span>FRIENDSHIP_OS <span class="sys-tag">BIRTHDAY v19.0 🎂</span></span>
+    </div>
+    <div class="hud-controls">
+      <button id="sound-toggle-btn" class="hud-btn" title="Toggle Audio Synthesizer">
+        <span id="sound-toggle-icon">🔊</span>
+        <span id="sound-toggle-text">SOUND ON</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Application Router Container -->
+  <main id="app-container">
+
+    <!-- ====================================================================
+         SCENE 0: BOOT SEQUENCE
+         ==================================================================== -->
+    <section id="scene-boot" class="scene active-scene">
+      <div class="terminal-window">
+        <div class="terminal-titlebar">
+          <div class="titlebar-dots">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+          </div>
+          <span class="titlebar-text">TERMINAL // BOOT_SEQUENCE.sh</span>
+        </div>
+        <div id="boot-terminal-content" class="terminal-body"></div>
+        <div id="boot-button-container" class="terminal-action-area hidden">
+          <button id="boot-start-btn" class="cyber-btn-primary">
+            INITIALIZE SYSTEM [ENTER] ↵
+          </button>
+          <span class="key-hint">Press ENTER or click to proceed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 1: SYSTEM PERSONALITY DIALOGUE
+         ==================================================================== -->
+    <section id="scene-personality" class="scene hidden">
+      <div class="personality-box">
+        <div class="personality-avatar">🤖</div>
+        <div id="personality-messages" class="personality-dialogue-list"></div>
+        <button id="personality-proceed-btn" class="cyber-btn-primary hidden">
+          BEGIN EVALUATION PROTOCOL ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 2: LEVEL 1 — FRIENDSHIP TEST (QUIZ)
+         ==================================================================== -->
+    <section id="scene-quiz" class="scene hidden">
+      <div class="quiz-container">
+        <div id="quiz-card" class="quiz-card">
+          <div class="quiz-header">
+            <div class="quiz-meta">
+              <span id="quiz-counter">QUESTION 1 OF 5</span>
+              <span>CONFIDENTIAL EVALUATION</span>
+            </div>
+            <div class="progress-track">
+              <div id="quiz-progress-bar" class="progress-fill" style="width: 20%;"></div>
+            </div>
+          </div>
+          <h2 id="quiz-question-title" class="quiz-title">Loading Question...</h2>
+          <div id="quiz-options-container" class="quiz-options"></div>
+          
+          <div id="quiz-reaction-box" class="reaction-box hidden">
+            <div class="reaction-badge">SYSTEM DIAGNOSTIC:</div>
+            <div id="quiz-reaction-text" class="reaction-text"></div>
+          </div>
+
+          <button id="quiz-next-btn" class="cyber-btn-primary hidden" style="width: 100%;">
+            CONTINUE EVALUATION ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 3: LEVEL 2 — MEMORY DATABASE & MAP
+         ==================================================================== -->
+    <section id="scene-memories" class="scene hidden">
+      <div class="memories-container">
+        <div class="section-header">
+          <span class="cyber-badge">LEVEL 2 // ARCHIVE_RECOVERY</span>
+          <h1 class="section-title">MEMORY DATABASE</h1>
+          <p class="section-desc">47 memories detected in subconscious storage. Click nodes to inspect files.</p>
+        </div>
+
+        <!-- Interactive Map Visualizer -->
+        <div class="memory-map-card">
+          <div class="map-nodes-row" id="memory-map-nodes"></div>
+        </div>
+
+        <!-- File Cards Grid -->
+        <div id="memory-files-grid" class="memory-grid"></div>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="memories-proceed-btn" class="cyber-btn-primary">
+            PROCEED TO RECOVERY PROTOCOL [GAME] 🎮
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 4: LEVEL 3 — THE FRIENDSHIP GAME
+         ==================================================================== -->
+    <section id="scene-game" class="scene hidden">
+      <div class="game-viewport-card">
+        <div class="game-hud">
+          <div class="hud-item">
+            <span class="hud-label">TARGET:</span>
+            <span class="hud-val">HARSHITHA</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">FRAGMENTS:</span>
+            <span id="game-fragment-counter" class="hud-val">0 / 5</span>
+          </div>
+          <div class="hud-item">
+            <span class="hud-label">CONTROLS:</span>
+            <span class="hud-val">WASD / ARROWS</span>
+          </div>
+        </div>
+
+        <div class="canvas-wrapper">
+          <canvas id="game-canvas"></canvas>
+        </div>
+
+        <!-- Mobile Touch Virtual Controls -->
+        <div class="mobile-dpad-container">
+          <div class="dpad-grid">
+            <button id="dpad-up" class="dpad-btn dpad-up">▲</button>
+            <button id="dpad-left" class="dpad-btn dpad-left">◀</button>
+            <button id="dpad-right" class="dpad-btn dpad-right">▶</button>
+            <button id="dpad-down" class="dpad-btn dpad-down">▼</button>
+          </div>
+          <div class="dpad-action-wrapper">
+            <button id="dpad-action" class="dpad-action-btn">TALK [E]</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 5: LEVEL 4 — CORRUPTED FILE & PASSWORD
+         ==================================================================== -->
+    <section id="scene-password" class="scene hidden">
+      <div class="glitch-wrapper">
+        <div class="glitch-card">
+          <span class="glitch-warning-badge">⚠️ CRITICAL ANOMALY DETECTED</span>
+          <h2 style="color: var(--red-danger); font-size: 22px; margin-bottom: 10px;">
+            CORRUPTED MEMORY FILE
+          </h2>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+            FILE: <span style="color: #fff; font-weight: bold;">BEST_FRIEND.dat</span> [ENCRYPTED]
+          </p>
+
+          <p style="font-size: 14px; line-height: 1.5; color: #e2e8f0;">
+            A secret password known only to Harshitha is required to unlock the protected archive.
+          </p>
+
+          <div class="password-input-group">
+            <input type="text" id="password-input" class="cyber-input" placeholder="ENTER SECRET PASSWORD..." autocomplete="off">
+            <button id="password-submit-btn" class="cyber-btn-primary">DECRYPT 🔓</button>
+          </div>
+
+          <div class="password-hints-area">
+            <button id="password-request-hint-btn" class="cyber-btn-secondary" style="font-size: 11px;">
+              REQUEST SYSTEM CLUE 💡
+            </button>
+            <div id="password-hint-box" class="hint-display-box hidden">
+              <span id="password-hint-text"></span>
+            </div>
+            <div id="password-roast-box" class="roast-display-box hidden">
+              <span id="password-roast-text"></span>
+            </div>
+            <div id="password-success-box" class="success-display-box hidden">
+              PASSWORD ACCEPTED ✅ Welcome back, Harshitha.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 6: THE TONE SHIFT (EMOTIONAL TRANSITION)
+         ==================================================================== -->
+    <section id="scene-tonesplit" class="scene hidden">
+      <div class="tone-shift-wrapper">
+        <div id="tone-shift-text-container"></div>
+        <button id="tone-shift-proceed-btn" class="cyber-btn-primary hidden" style="margin-top: 30px;">
+          ENTER THE ARCHIVE ✨
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 7: LEVEL 5 — THE GALAXY
+         ==================================================================== -->
+    <section id="scene-galaxy" class="scene hidden">
+      <canvas id="galaxy-canvas"></canvas>
+      
+      <div class="galaxy-ui-overlay">
+        <div class="galaxy-hud-card">
+          <span style="font-size: 18px;">🌌</span>
+          <span class="galaxy-tip">Drag to rotate the galaxy • Click glowing constellations</span>
+        </div>
+      </div>
+
+      <div class="galaxy-bottom-controls">
+        <button id="galaxy-reveal-btn" class="cyber-btn-primary">
+          REVEAL CELESTIAL ALIGNMENT ✨
+        </button>
+      </div>
+
+      <div id="galaxy-final-banner" class="galaxy-bottom-controls hidden" style="bottom: 85px;">
+        <button id="galaxy-next-btn" class="cyber-btn-primary" style="background: linear-gradient(135deg, #ffd700, #ff007f); color: #fff;">
+          READ FINAL ARCHIVE FILE: /HARSHITHA/thank_you.txt ➔
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 8: LEVEL 6 — THE PERSONAL LETTER
+         ==================================================================== -->
+    <section id="scene-letter" class="scene hidden">
+      <div class="letter-wrapper">
+        <div class="letter-card">
+          <div class="letter-header">
+            <span>FILE: /HARSHITHA/thank_you.txt</span>
+            <span>STATUS: DECRYPTED & PERMANENT</span>
+          </div>
+          <div id="letter-content" class="letter-body"></div>
+          <div style="text-align: center; margin-top: 30px;">
+            <button id="letter-proceed-btn" class="cyber-btn-primary hidden">
+              ARCHIVE PROTOCOLS ➔
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 9: THE FAKE DELETE BUTTON JOKE
+         ==================================================================== -->
+    <section id="scene-delete-joke" class="scene hidden">
+      <div class="delete-joke-wrapper">
+        <div class="delete-card">
+          <h2 style="font-size: 22px; margin-bottom: 12px;">SYSTEM OPTIONS</h2>
+          <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">
+            All friendship fragments, memories, and records have been synchronized.<br>
+            Please select an action:
+          </p>
+
+          <div class="delete-actions-row">
+            <button id="keep-friendship-btn" class="cyber-btn-primary">
+              KEEP FOREVER ❤️
+            </button>
+            <button id="delete-friendship-btn" class="cyber-btn-danger">
+              DELETE FRIENDSHIP 🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCENE 10: FINAL ACHIEVEMENT & EASTER EGGS
+         ==================================================================== -->
+    <section id="scene-achievement" class="scene hidden">
+      <div class="achievement-wrapper">
+        <div class="achievement-card">
+          <div class="trophy-badge">🎂👑</div>
+          <div class="achievement-title">LEVEL 19 COMPLETED — BIRTHDAY SPECIAL</div>
+          <h3 style="color: #ffd700; font-size: 24px; margin-bottom: 6px;">HAPPY 19th BIRTHDAY, HARSHITHA! 🎉</h3>
+          <p style="font-size: 13px; color: var(--text-muted);">Player: HARSHITHA • Title: Birthday Queen & Best Friend ❤️</p>
+
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-name">MEMORIES LOGGED</div>
+              <div class="stat-val">██████████ 100%</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">AGE MILESTONE</div>
+              <div class="stat-val" style="color: #ffd700;">LEVEL 19 (19 YRS) 🎂</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">CHAOS LEVEL</div>
+              <div class="stat-val" style="color: var(--pink-neon);">██████████ 9999%</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-name">FRIENDSHIP DURATION</div>
+              <div class="stat-val" style="color: var(--green-term);">∞ (ETERNAL)</div>
+            </div>
+          </div>
+
+          <div class="permanent-status-banner" style="background: linear-gradient(90deg, rgba(255, 215, 0, 0.2), rgba(255, 0, 127, 0.2)); border: 1px solid #ffd700;">
+            🎉 HAPPY 19TH BIRTHDAY HARSHITHA — BEST FRIENDS FOREVER ❤️🎂
+          </div>
+        </div>
+      </div>
+
+      <!-- Secret Easter Egg Trigger -->
+      <button id="secret-easter-egg-btn" class="secret-trigger-btn" title="A classified note...">
+        ???
+      </button>
+
+      <!-- Celebration Confetti Canvas -->
+      <canvas id="confetti-canvas"></canvas>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       INTERACTIVE MODALS
+       ==================================================================== -->
+
+  <!-- Memory Detail Modal -->
+  <div id="memory-detail-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card">
+      <div id="modal-mem-visual"></div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+        <span id="modal-mem-tag" class="mem-tag"></span>
+        <span id="modal-mem-date" style="font-size: 11px; color: var(--text-muted);"></span>
+      </div>
+      <h3 id="modal-mem-title" style="font-size: 18px; margin-bottom: 10px;"></h3>
+      <p id="modal-mem-summary" style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.5;"></p>
+      <div id="modal-mem-quote" style="font-style: italic; color: var(--cyan-neon); font-size: 13px; margin-bottom: 14px; padding-left: 10px; border-left: 2px solid var(--cyan-neon);"></div>
+      <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 6px; font-size: 12px; margin-bottom: 18px;">
+        <strong style="color: var(--yellow-warm);">System Analysis:</strong> <span id="modal-mem-analysis"></span>
+      </div>
+      <button id="modal-mem-close-btn" class="cyber-btn-secondary" style="width: 100%;">
+        CLOSE MEMORY ARCHIVE [X]
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Fragment Modal -->
+  <div id="game-fragment-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center;">
+      <h3 id="frag-modal-name" style="color: var(--cyan-neon); font-size: 18px; margin-bottom: 6px;"></h3>
+      <h4 id="frag-modal-title" style="color: var(--text-muted); font-size: 13px; margin-bottom: 16px;"></h4>
+      <p id="frag-modal-story" style="font-size: 14px; line-height: 1.6; margin-bottom: 18px; color: #e2e8f0;"></p>
+      <div id="frag-modal-count" style="font-size: 12px; color: var(--green-term); font-weight: bold; margin-bottom: 20px;"></div>
+      <button id="frag-continue-btn" class="cyber-btn-primary" style="width: 100%;">
+        CONTINUE EXPLORATION ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- Game NPC Dialogue Modal -->
+  <div id="game-dialogue-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card">
+      <h3 id="dialogue-title" style="color: var(--pink-neon); font-size: 16px; margin-bottom: 14px;"></h3>
+      <div id="dialogue-text" style="font-size: 14px; line-height: 1.6; margin-bottom: 20px;"></div>
+      <button id="dialogue-close-btn" class="cyber-btn-secondary" style="width: 100%;">
+        CLOSE CONVERSATION [E]
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Complete Banner Modal -->
+  <div id="game-complete-banner" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center;">
+      <div style="font-size: 48px; margin-bottom: 12px;">🎉</div>
+      <h3 style="color: var(--green-term); font-size: 20px; margin-bottom: 8px;">ALL 5 FRAGMENTS RECOVERED!</h3>
+      <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 20px;">
+        Memories, Chaos, Trust, Laughter, and Friendship have been assembled.
+      </p>
+      <button id="game-portal-btn" class="cyber-btn-primary" style="width: 100%;">
+        ACCESS RESTRICTED ARCHIVE FILE ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- Constellation Modal -->
+  <div id="constellation-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center;">
+      <div id="constellation-symbol" style="font-size: 42px; margin-bottom: 10px;"></div>
+      <h3 id="constellation-name" style="color: #ffd700; font-size: 18px; margin-bottom: 10px;"></h3>
+      <p id="constellation-quote" style="font-size: 14px; line-height: 1.6; color: #e2e8f0; margin-bottom: 20px; font-style: italic;"></p>
+      <button id="constellation-close-btn" class="cyber-btn-secondary" style="width: 100%;">
+        RETURN TO GALAXY
+      </button>
+    </div>
+  </div>
+
+  <!-- Fake Deletion Progress Modal -->
+  <div id="delete-progress-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center;">
+      <h3 style="color: var(--red-danger); font-size: 18px; margin-bottom: 12px;">DELETING FRIENDSHIP...</h3>
+      <div class="progress-track" style="margin-bottom: 10px;">
+        <div id="delete-progress-bar" class="progress-fill" style="background: var(--red-danger); width: 0%;"></div>
+      </div>
+      <span id="delete-progress-percent" style="font-size: 13px; font-weight: bold; color: var(--red-danger);">0%</span>
+    </div>
+  </div>
+
+  <!-- Fake Deletion Error Modal -->
+  <div id="delete-error-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center; border-color: var(--red-danger); box-shadow: 0 0 40px rgba(255,34,68,0.5);">
+      <div style="font-size: 42px; margin-bottom: 10px;">❌</div>
+      <h3 style="color: var(--red-danger); font-size: 20px; margin-bottom: 12px;">ERROR: CANNOT DELETE</h3>
+      <div style="font-size: 14px; line-height: 1.6; text-align: left; background: rgba(0,0,0,0.4); padding: 14px; border-radius: 8px; margin-bottom: 20px;">
+        <p style="margin-bottom: 8px;"><strong>Reason:</strong> HARSHITHA is turning 19 today and is protected by the 19th Birthday Immunity Protocol 🎂🛡️.</p>
+        <p style="margin-bottom: 8px;">Deleting her will trigger irreversible system collapse and ruin the birthday party!</p>
+        <p style="color: var(--green-term); font-weight: bold;">Recommended Action: KEEP FOREVER & WISH HAPPY 19TH BIRTHDAY ❤️🎂</p>
+      </div>
+      <button id="delete-error-action-btn" class="cyber-btn-primary" style="width: 100%;">
+        KEEP FOREVER ❤️
+      </button>
+    </div>
+  </div>
+
+  <!-- Secret Developer Note Easter Egg Modal -->
+  <div id="secret-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card">
+      <h3 style="color: #ffd700; font-size: 16px; margin-bottom: 12px;">DEVELOPER'S PRIVATE NOTE [CLASSIFIED]</h3>
+      <p style="font-size: 14px; line-height: 1.7; color: #e2e8f0; margin-bottom: 20px;">
+        If you clicked this secret button... Congratulations, you really are hopelessly curious! 😂<br><br>
+        Just wanted to say: Building this for you put the biggest smile on my face. Thank you for being you, Harshitha. Don't ever change. ❤️
+      </p>
+      <button id="secret-modal-close-btn" class="cyber-btn-secondary" style="width: 100%;">
+        CLOSE CLASSIFIED FILE
+      </button>
+    </div>
+  </div>
+
+  <!-- DevTools Anti-Cheat Detected Modal -->
+  <div id="devtools-modal" class="modal-backdrop hidden">
+    <div class="modal-content-card" style="text-align: center; border-color: var(--yellow-warm);">
+      <div style="font-size: 40px; margin-bottom: 10px;">🚨</div>
+      <h3 style="color: var(--yellow-warm); font-size: 18px; margin-bottom: 8px;">DEVELOPER DETECTED!</h3>
+      <p style="font-size: 14px; line-height: 1.6; color: #e2e8f0; margin-bottom: 20px;">
+        Subject appears to be attempting unauthorized system inspection in DevTools.<br><br>
+        Honestly... <em>Respect.</em> I knew you'd check the code! 😂<br>
+        No cheating though!
+      </p>
+      <button id="devtools-close-btn" class="cyber-btn-primary" style="width: 100%;">
+        CONTINUE ANYWAY ➔
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="config.js"></script>
+  <script src="audio.js"></script>
+  <script src="game.js"></script>
+  <script src="galaxy.js"></script>
+  <script src="app.js"></script>
+  <script src="birthday.js"></script>
+</body>
+</html>
